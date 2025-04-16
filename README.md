@@ -2,7 +2,7 @@
 
 Hier findest du alle Lernblätter für das 2. Semester von Studiengang Software Engineering
 
-Die Lernblätter findest du im Branch [Sheets](https://github.tik.uni-stuttgart.de/st192450/2.Semester/tree/Sheets)
+Die Lernblätter findest du im Branch [Sheets](https://github.com/SackBart/SE2.Semester/tree/Sheets)
 
 Die .tex Dateien findest du bei den jeweiligen Ordnern in main
 
