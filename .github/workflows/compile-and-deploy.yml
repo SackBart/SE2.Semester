@@ -1,0 +1,56 @@
+name: Compile and Deploy PDFs
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [closed]
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  compile_and_deploy:
+    if: github.event_name == 'push' || github.event.pull_request.merged == true
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Install TeX Live
+        run: |
+          sudo apt update
+          sudo apt install -y texlive-latex-base texlive-latex-extra texlive-fonts-recommended texlive-fonts-extra latexmk
+
+      - name: Compile PDFs
+        run: |
+          find . -name "*.tex" | while read file; do
+            dir=$(dirname "$file")
+            texfile=$(basename "$file")
+            foldername=$(basename "$dir")
+            filename=$(basename "$texfile" .tex)
+            pdfname="$foldername-$filename.pdf"
+            cd "$dir"
+            latexmk -pdf -interaction=nonstopmode "$texfile"
+            mv "$filename.pdf" "../$pdfname"
+            cd -
+          done
+
+      - name: Generate PDF
+        run: |
+          mkdir publish
+          mv *.pdf publish/
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./publish
+          enable_jekyll: false
+          publish_branch: Sheets
+          full_commit_message: 'Frische neue Sheets'
+          force_orphan: true
+          user_name: 'Hubert'
+          user_email: 'Hubert@users.noreply.github.com'

@@ -1,0 +1,238 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage[left=2cm, right=2cm, top=2cm, bottom=2cm]{geometry}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage[utf8]{inputenc}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{url}
+\usepackage{hyperref}
+\usepackage{xcolor}
+
+\usepackage{lineno}
+
+\setlength{\oddsidemargin}{0cm}
+\setlength{\evensidemargin}{0cm}
+\setlength{\topmargin}{0cm}
+\setcounter{section}{-1}
+\title{Mathematik für Informatikstudiengänge II}
+\date{}
+
+\hypersetup{
+	colorlinks=true,
+	linkcolor=teal,
+	filecolor=magenta,      
+	urlcolor=cyan,
+}
+
+\newcommand*\conj[1]{\bar{#1}}
+\newcommand*\mean[1]{\bar{#1}}
+\newcommand\myeq{\stackrel{\mathclap{\normalfont\mbox{IV}}}{=}}
+\newcommand\griv{\stackrel{\mathclap{\normalfont\mbox{IV}}}{>}}
+\newcommand\phut{\stackrel{\mathclap{\normalfont\mbox{^}}}{P}}
+
+% Da fängt's wieder an
+
+\begin{document}
+	\maketitle
+	\tableofcontents
+	\newpage
+	\section{Der Euklidische Raum}
+		Ein euklidische Raum ist ein spezieller Vektorraum, der als $\mathbb{R}^n$ dargestellt werden kann. \textcolor{gray}{Beispiele wären also eine Ebene für $n=2$ oder der 3-dimensionale Raum, in dem wir leben mit $n=3$}. Diese speziellen Vektorräume sind praktisch, wie wir gleich sehen werden:\\
+		\subsection{Standart-Skalarprodukt}
+			Dieses Skalarprodukt kann schon aus der Schule bekannt sein, wird aber allgemein formuliert als:
+			\begin{equation}
+				\langle x, y \rangle = x_1 \cdot y_1 + \dots + x_n \cdot y_n
+			\end{equation}
+			Diese eckigen Klammern sind eine mögliche Schreibweise für das Skalarprodukt.
+		\subsubsection{Beispiel:}
+			Sei \begin{equation*} x = \begin{bmatrix}
+				3 \\ 1 \\ 6 \\ -1 \\
+			\end{bmatrix} \mbox { und }y = \begin{bmatrix}
+			-2 \\ 0 \\ -3 \\ 1 \\
+			\end{bmatrix}\end{equation*} \\
+			Dann lässt sich das Skalarprodukt berechnen als:\\
+			\begin{equation*} \langle x, y \rangle = 3 \cdot -2 + 1 \cdot 0 + 6 \cdot -3 + -1 \cdot 1 =  -25 \end{equation*}
+			\subsubsection{Anmerkung zur Positiv-Definitheit}
+				\textcolor{gray}{Das Skalarprodukt kann grundsätzlich auch negativ sein. Allerdings kann das Skalarprodukt grob vereinfacht veranschaulicht werden als die Fläche des Parallelogramms, dass von einem Vektor und dem anderen noch um 90 Grad gedrehten Vektor aufgespannt wird. Eine Fläche hat natürlich einen nicht-negativen Flächeninhalt, daher kann bei der Interpretation des Skalarprodukts manchmal der Betrag sinnvoller sein.}
+			\subsubsection{Ausmultiplizieren im Skalarprodukt}
+				Hier noch eine weitere Umformung, die sich im Skalarprodukt nutzen lassen. Hier sind $x, y, z$ Vektoren und $s, t$ Skalare (Zahlen):
+				\begin{equation}
+					\langle sx + ty, z \rangle = s\langle x, z \rangle + t\langle y, z \rangle
+				\end{equation}
+		\subsection{Norm eines Vektors}
+			Der Norm eines Vektors lässt sich verstehen als die Länge dieses Vektors. Wer sich hier noch an die Schuldefinition erinnert ($\sqrt{x_1^2+x_2^2+\dots+x_n^2}$) wird nachvollziehen können, dass diese Formel mit dem gerade eingeführten Skalarprodukt noch etwas formalisiert werden kann:
+			\begin{equation}
+				\left\lVert x \right\rVert = \sqrt{\langle x, x \rangle}
+			\end{equation}
+			In der Vorlesung wurde noch eine weitere Gleichung eingeführt, die an die erste binomische Formel erinnert:
+			\begin{equation}
+					\left\lVert sx + ty \right\rVert^2 = s^2\left\lVert x \right\rVert^2 + 2st\langle x, y \rangle + t^2 \left\lVert y \right\rVert^2
+			\end{equation}
+		\subsection{Cauchy-Schwarz-Ungleichung}
+			Diese Ungleichung besagt:
+			\begin{equation}
+				\langle x, y \rangle \leq \left\lVert x \right\rVert \cdot \left\lVert y \right\rVert
+			\end{equation}	
+			\textcolor{gray}{Anschauliche Begründung: Das Skalarprodukt (links) gibt den Flächenanhalt des Parallelogramms an, dass von einem Vektor und dem anderen noch um 90 Grad gedrehten Vektor aufgespannt wird. Das Produkt der Längen der Vektoren (rechts) kann z.B. als Flächeninhalt eines Rechtecks verstanden werden, bei dem die Seiten eben x und y sind.\\
+			Die Ungleichung sagt also aus, dass der Flächeninhalt dieses Rechtecks immer mindestens so groß sein wird wie der des Parallelogramms.}
+		\subsection{Dreiecksungleichung}
+			Diese Ungleichung besagt:
+			\begin{equation}
+				\left\lVert x+y \right\rVert \leq \left\lVert x \right\rVert + \left\lVert y \right\rVert
+			\end{equation}
+			\textcolor{gray}{Anschauliche Begründung: Die Norm gibt immer die Länge des Vektors an. Die Länge der beiden Vektoren (rechts) addiert ist also immer mindestens so lang wie der Vektor x+y. Der Vektor x+y entsteht, indem man diese beiden Vektoren aneinander hängt. Solange die beiden Vektoren nicht in die gleiche Richtung zeigen, werden diese Vektoren ein Dreieck bilden, also ist der Abstand zwischen Anfang und Ende der beiden aneinandergehängten Pfeile  kürzer als die Länge beider Pfeile.}
+		\subsection{Gram-Schmidt-Orthogonalisierung}
+			Dieses Verfahren kann angewendet werden, um aus einer Basis eines Vektorraums eine Orthogonalbasis zu machen, also eine Basis, in der alle Basisvektoren rechtwinklig zueinander stehen. 
+			\textcolor{gray}{Eine Ebene kann z.B. durch zwei Vektoren, die in der Ebene liegen, angegeben werden. Es kann aber manchmal sinnvoll sein, stattdessen zwei Vektoren zu haben, die zusätzlich noch rechtwinklig zueinander stehen}
+		\subsubsection{Beispiel}
+			Anstatt komplexer Definitionen gibt es jetzt einfach direkt ein Zahlenbeispiel: Sei die Basis des Vektorraums\\
+			\begin{equation*}
+				v_1 = \begin{bmatrix} 1 \\ 2 \\ 0 \\ 0 \\ \end{bmatrix}, 
+				v_2 = \begin{bmatrix} 10 \\ 0 \\ 5 \\ 0 \\ \end{bmatrix}, 
+				v_3 = \begin{bmatrix} 1 \\ 1 \\ 0 \\ 1 \\ \end{bmatrix}, 
+			\end{equation*}
+			Wir wollen jetzt dazu ein $w_1$, $w_2$, $w_3$ finden: \\
+			\textbf{Schritt 1:}
+			\begin{equation*} w_1 = v_1 = \begin{bmatrix} 1 \\ 2 \\ 0 \\ 0 \\ \end{bmatrix} \end{equation*}
+			\textbf{Schritt 2:}\\
+			Hier wird's etwas komplizierter:
+			\begin{eqnarray*} w_2 &=& v_2 - \frac{\langle v_2, w_1 \rangle}{\langle w_1, w_1 \rangle} \cdot w_1 \\
+				&=& \begin{bmatrix} 10 \\ 0 \\ 5 \\ 0 \\ \end{bmatrix} - \frac{(10 \cdot 1 + 0 \cdot 2 + 5 \cdot 0 + 0 \cdot 0)}
+				{(1 \cdot 1 + 2 \cdot 2 + 0 \cdot 0 + 0 \cdot 0)} \cdot \begin{bmatrix} 1 \\ 2 \\ 0 \\ 0 \\ \end{bmatrix} \\
+				&=& \begin{bmatrix} 10 \\ 0 \\ 5 \\ 0 \\ \end{bmatrix} - 
+				\frac{10}{5} \cdot \begin{bmatrix} 1 \\ 2 \\ 0 \\ 0 \\ \end{bmatrix} \\
+				&=& \begin{bmatrix} 8 \\ -4 \\ 5 \\ 0 \\ \end{bmatrix}
+			\end{eqnarray*}
+			\textbf{Schritt 3:}\\
+			\begin{eqnarray*}
+				w_3 &=& v_3 - \frac{\langle v_3, w_1 \rangle}{\langle w_1, w_1 \rangle} \cdot w_1 - \frac{\langle v_3, w_2 \rangle}{\langle w_2, w_2 \rangle} \cdot w_2\\
+				&=& \begin{bmatrix} 1 \\ 1 \\ 0 \\ 1 \\ \end{bmatrix} - \frac35 \cdot \begin{bmatrix} 1 \\ 2 \\ 0 \\ 0 \\ \end{bmatrix} - \frac4{105} \cdot \begin{bmatrix} 8 \\ -4 \\ 5 \\ 0 \\ \end{bmatrix} \\
+				&=& \begin{bmatrix} \frac2{21} \\ -\frac{1}{21} \\ -\frac4{21} \\ 1 \\ \end{bmatrix}
+			\end{eqnarray*}
+			Wir dürfen auch jederzeit unser neues $w$ skalieren, also multipliziere ich noch $w_3$ mit 21, damit das Ergebnis etwas simpler wird:\\
+			\begin{equation*}
+				w_3 =  \begin{bmatrix} 2 \\ -1 \\ -4 \\ 21 \\ \end{bmatrix}
+			\end{equation*}
+			\textbf{Schritt 4:}
+			Kontrolle der Ergebnisse. Jetzt muss für jedes Paar von neuen Vektoren das Skalarprodukt 0 sein:
+			\begin{eqnarray*}
+				\langle w_1, w_2 \rangle &=& 0 \\
+				\langle w_1, w_3 \rangle &=& 0 \\
+				\langle w_2, w_3 \rangle &=& 0
+			\end{eqnarray*}
+			Wenn hier überall 0 rauskommt, war die Rechnung vorher korrekt. Die Orthogonalbasis ist hier also:
+			\begin{equation*}
+				w_1 = \begin{bmatrix} 1 \\ 2 \\ 0 \\ 0 \\ \end{bmatrix}, 
+				w_2 = \begin{bmatrix} 8 \\ -4 \\ 5 \\ 0 \\ \end{bmatrix}, 
+				w_3 = \begin{bmatrix} 2 \\ -1 \\ -4 \\ 21 \\ \end{bmatrix}
+			\end{equation*}
+		\subsection*{Orthonomalbasis}
+			Eine Orthonomalbasis ist eine Orthogonalbasis, bei der zusätzlich die Norm aller Basisvektoren gleich 1 ist.\\
+			\textcolor{gray}{Zusätzlich zu dem rechten Winkel der Vektoren müssen die jetzt auch noch die Länge 1 haben.}\\
+			Dazu wird jeder Vektor $w$ durch seinen Norm geteilt.
+			\begin{equation*}
+				z_i = \frac{1}{\left\lVert w_i \right\rVert} \cdot w_i
+			\end{equation*}
+			\subsubsection*{Beispiel}
+				Hier nehmen wir noch einmal die Orthogonalbasis aus dem vorherigen Beispiel und wandeln sie in eine Orthonormalbasis um.
+				\begin{equation*}
+					w_1 = \begin{bmatrix} 1 \\ 2 \\ 0 \\ 0 \\ \end{bmatrix}, 
+					w_2 = \begin{bmatrix} 8 \\ -4 \\ 5 \\ 0 \\ \end{bmatrix}, 
+					w_3 = \begin{bmatrix} 2 \\ -1 \\ -4 \\ 21 \\ \end{bmatrix}
+				\end{equation*}
+				\begin{eqnarray*}
+					z_1 &=& \frac{1}{\left\lVert w_1 \right\rVert} \cdot w_1 = \frac1{\sqrt{5}} \cdot \begin{bmatrix} 1 \\ 2 \\ 0 \\ 0 \\ \end{bmatrix} = \begin{bmatrix} \frac1{\sqrt{5}} \\ \frac2{\sqrt{5}} \\ 0 \\ 0 \\ \end{bmatrix} \\
+					z_2 &=& \frac{1}{\left\lVert w_2 \right\rVert} \cdot w_2 = \frac1{\sqrt{105}} \cdot \begin{bmatrix} 8 \\ -4 \\ 5 \\ 0 \\ \end{bmatrix} = \begin{bmatrix} \frac8{\sqrt{105}} \\ -\frac4{\sqrt{105}} \\ \frac5{\sqrt{105}} \\ 0 \\ \end{bmatrix} \\
+					z_3 &=& \frac{1}{\left\lVert w_3 \right\rVert} \cdot w_3 = \frac1{\sqrt{462}} \cdot \begin{bmatrix} 2 \\ -1 \\ -4 \\ 21 \\ \end{bmatrix} = \begin{bmatrix} \frac2{\sqrt{462}} \\ -\frac1{\sqrt{462}} \\ -\frac4{\sqrt{462}} \\ \frac{21}{\sqrt{462}} \\ \end{bmatrix}
+				\end{eqnarray*}
+				Es ergibt sich also die Orthonormalbasis
+				\begin{equation*}
+					z_1 = \begin{bmatrix} \frac1{\sqrt{5}} \\ \frac2{\sqrt{5}} \\ 0 \\ 0 \\ \end{bmatrix},
+					z_2 = \begin{bmatrix} \frac8{\sqrt{105}} \\ -\frac4{\sqrt{105}} \\ \frac5{\sqrt{105}} \\ 0 \\ \end{bmatrix}, 
+					z_3 = \begin{bmatrix} \frac2{\sqrt{462}} \\ -\frac1{\sqrt{462}} \\ -\frac4{\sqrt{462}} \\ \frac{21}{\sqrt{462}} \\ \end{bmatrix}
+				\end{equation*}
+			\subsection{Lemma zur Rechtwinkligkeit (19.6)}
+				In einem Teilraum $U$ gibt immer ein $u_0 \in U$ sodass für jedes $v \in \mathbb{R}$ ein $v'$ existiert, sodass $v = u_0 + v$ und $\langle u, v'\rangle = 0 \forall u \in U$ gilt.\\
+				\textcolor{gray}{Veranschaulichung: Sei der Vektorraum 3-dimensional und der Teilraum $U$ eine Ebene, z.B der Boden. Dann sagt dieses Lemma aus, dass jeder Punkt in diesem "Raum" auch dargestellt werden kann als ein Vektor auf dem Boden plus ein dazu senkrecht stehender Vektor}
+		\subsection{Methode der kleinsten Quadrate}
+			Hierbei handelt es sich um eine Methode, mit der eine Ausgleichsfunktion durch eine Anzahl von Datenpunkten gefunden wird. Im folgenden Beispiel suchen wir eine Ausgleichsgerade, also eine lineare Funktion, die so nah wie möglich an allen Datenpunkten liegt.
+			\subsubsection{Beispiel}
+				Seien folgende Werte für $x, y$ gegeben:\\
+				\begin{center} \begin{tabular}{c|c|c|c|c|c}
+					x & 0 & 1 & 2 & 3 & 4\\ \hline
+					y & 2 & 0 & 1 & 2 & 3\\
+				\end{tabular} \end{center}
+				Wir wollen hier jetzt eine Ausgleichsgerade durch legen: \\Diese Ausgleichsgerade sieht allgemein so aus:
+				\begin{equation*}
+						f(x) = p_0 + p_1 \cdot x
+				\end{equation*}
+				Diese Werte wollen wir nun in ein Gleichungssystem umschreiben:
+				\begin{eqnarray*}
+					p_0 + 0 \cdot p_1 &=& 2 \\ 
+					p_0 + 1 \cdot p_1 &=& 0 \\ 
+					p_0 + 2 \cdot p_1 &=& 1 \\
+					p_0 + 3 \cdot p_1 &=& 2 \\
+					p_0 + 4 \cdot p_1 &=& 3
+				\end{eqnarray*}
+				Dieses Gleichungssystem wandeln wir nun in eine Gleichung mit Matrizen um:
+				\begin{equation*}
+					\begin{bmatrix}
+						1 & 0 \\ 1 & 1 \\ 1 & 2 \\ 1 & 3 \\ 1 & 4 \\
+					\end{bmatrix} \cdot \begin{bmatrix}
+					p_0 \\ p_1
+					\end{bmatrix} = \begin{bmatrix} 2 \\ 0 \\ 1 \\ 2 \\ 3 \end{bmatrix}
+				\end{equation*}
+				Nun multiplizieren wir beide Seiten mit der transponierten Koeffizientenmatrix:
+				\begin{eqnarray*}
+					A^T \cdot \begin{bmatrix}
+						1 & 0 \\ 1 & 1 \\ 1 & 2 \\ 1 & 3 \\ 1 & 4 \\
+					\end{bmatrix} \cdot \begin{bmatrix}
+						p_0 \\ p_1
+					\end{bmatrix} &=& A^T \cdot \begin{bmatrix} 2 \\ 0 \\ 1 \\ 2 \\ 3 \end{bmatrix} \\
+					\begin{bmatrix}
+						1 & 1 & 1 & 1 & 1 \\
+						0 & 1 & 2 & 3 & 4 \\
+					\end{bmatrix}\cdot \begin{bmatrix}
+						1 & 0 \\ 1 & 1 \\ 1 & 2 \\ 1 & 3 \\ 1 & 4 \\
+					\end{bmatrix} \cdot \begin{bmatrix}
+						p_0 \\ p_1
+					\end{bmatrix} &=& \begin{bmatrix}
+					1 & 1 & 1 & 1 & 1 \\
+					0 & 1 & 2 & 3 & 4 \\
+					\end{bmatrix} \cdot \begin{bmatrix} 2 \\ 0 \\ 1 \\ 2 \\ 3 \end{bmatrix} \\
+					\begin{bmatrix}
+						5 & 10 \\ 10 & 30 \\
+					\end{bmatrix} \cdot \begin{bmatrix}
+					p_0 \\ p_1
+					\end{bmatrix} &=& \begin{bmatrix} 8 \\ 20 \end{bmatrix}
+				\end{eqnarray*}
+				Diese Gleichung können wir jetzt noch mittels Gauß lösen:
+				\begin{eqnarray*}
+					\begin{bmatrix}
+						5 & 10 \\ 0 & 10 \\
+					\end{bmatrix} \cdot \begin{bmatrix}
+						p_0 \\ p_1
+					\end{bmatrix} &=& \begin{bmatrix} 8 \\ 4 \end{bmatrix} \\
+					\begin{bmatrix}
+						5 & 0 \\ 0 & 10 \\
+					\end{bmatrix} \cdot \begin{bmatrix}
+						p_0 \\ p_1
+					\end{bmatrix} &=& \begin{bmatrix} 4 \\ 4 \end{bmatrix} \\
+					\begin{bmatrix}
+						1 & 0 \\ 0 & 1 \\
+					\end{bmatrix} \cdot \begin{bmatrix}
+						p_0 \\ p_1
+					\end{bmatrix} &=& \begin{bmatrix} \frac45 \\ \frac25 \end{bmatrix} \\
+					p_0 = \frac45 &, & p_1 = \frac25
+				\end{eqnarray*}
+				Wir haben nun Werte für die beiden gesuchten Werte gefunden, also lautet die Ausgleichsgerade
+				\begin{equation*}
+					f(x) = \frac45 + \frac25 \cdot x
+				\end{equation*}
+				Das gleiche Prinzip kann auch genutzt werden, um eine Ausgleichsparabel, Ausgleichshyperbel usw. zu finden. Für ein weiteres Beispiel einer Parabel kann ich zum Beispiel \href{https://www.abi-mathe.de/buch/matrizen/methode-der-kleinsten-quadrate/}{diese Seite} hier empfehlen.
+			\subsection{Lösung mit minimaler Norm (Satz 19.8)}
+				Sei $L$ ein Untervektorraum eines euklidischen Raumes. In der Vorlesung ist $L$ zusätzlich der Lösungsraum eines LGS. In $L$ gibt es nun genau einen Vektor mit der kleinsten Norm.\\
+				\textcolor{gray}{Sei anschaulicher der euklidische Raum nun 3-dimensional und $L$ eine 2-dimensionale Ebene. Dann sagt dieser Satz aus, dass es einen Punkt in dieser Ebene gibt, die dem Ursprung am nächsten liegt. Außerdem: der Vektor vom Ursprung auf diesen Punkt liegt orthogonal zum Lösungsraum $L$}
+\end{document}
