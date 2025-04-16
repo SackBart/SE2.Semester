@@ -52,5 +52,5 @@ jobs:
           publish_branch: Sheets
           full_commit_message: 'Frische neue Sheets'
           force_orphan: true
-          user_name: 'Hubert'
-          user_email: 'Hubert@users.noreply.github.com'
+          user_name: 'software_engineer_bot_penis'
+          user_email: 'software_engineer_bot_penis@users.noreply.github.com'
