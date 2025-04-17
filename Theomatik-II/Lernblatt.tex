@@ -475,13 +475,43 @@
 	\subsection{Beispiel für Strukturen/Werte von Termen}
 	Man geht von einer gegebenen Formel aus, wie z.B:
 	\[F = \forall x \exists y \exists y' ((P(x,y)\wedge P(x,y'))\wedge \forall z (\neg P(x,z)\vee(Q(y,z)\vee Q(y',z))))\]
-	%\textcolor{gray}{Das ist nur ein Beispiel. Diese Formel wird nicht für's Erklären benutzt.}\\
+	\textcolor{gray}{Ignoriere noch diese Formel, falls du sie nicht verstehst} \\
+	\\
 	Als \textbf{Individuenbereich} $U_\mathcal{A}$ nimmt man häufig $\mathbb{N}$ - das muss aber nicht sein. \\
 	Durch $I_\mathcal{A}$ müssen dann alle freien Variablen, Prädikate und alle Funktionen definiert werden. In dem Fall wählen wir jetzt \\
 	\\
 	$U_\mathcal{A} = V$ für einen ungerichteten Graphen $G = (V,E)$ \\
+	\textcolor{gray}{Ein ungerichteter Graph ist nicht anders als ein Graph von einem Automaten oder von einem Syntaxbaum: } \\
+	\\
+	\begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto]
+		\tikzstyle{every state}=[fill={rgb:black,1;white,30}]
+		
+		\node[state] (q_0) at (2,0) { };
+		\node[state] (q_1) at (0,0){ };
+		\node[state] (q_2) at (1,1.5){ };
+		\node[state] (q_3) at (3,0.75){ };
+		
+		\path[draw]
+		(q_0) edge node {} (q_2)
+		(q_2) edge node {} (q_1)
+		(q_0) edge node {} (q_1);
+	\end{tikzpicture}\\
+	 \textcolor{gray}{Dabei ist $V$ die Menge der Knoten (Kreise) und E die Menge der Kanten (Verbindungen zwischen 2 Knoten) mit $E \subseteq V \times V$}
+	\\
 	$I_\mathcal{A}(P) = P^\mathcal{A} = \{(u,v) \:|\: u,v \in V \: und \: \{u,v\}\in E\}$ (Kantenrelation)\\
-	$I_\mathcal{A}(Q) = Q^\mathcal{A} = \{(u,v) \:|\: u \in V\}$  (Gleichheit) \\
+	\textcolor{gray}{Anders ausgedrückt: P ist eine zweistellige Funktion und sind beide Knoten miteinander verbunden? Wahr wenn ja, falsch wenn nein.} \\
+	$I_\mathcal{A}(Q) = Q^\mathcal{A} = \{(u,u) \:|\: u \in V\}$  (Gleichheit) \\
+	\textcolor{gray}{Anders ausgedrückt: Q ist eine zweistellige Funktion und sind beide Knoten gleich? Wahr wenn ja, falsch wenn nein.} \\
+	\\
+	Zur Funktion $F$ gibt es zwei Teile:
+	\[F = \forall x \exists y \exists y' \textcolor{red}{((P(x,y)\wedge P(x,y'))}\wedge \textcolor{blue}{\forall z (\neg P(x,z)\vee(Q(y,z)\vee Q(y',z))))}\]
+	Die \textcolor{red}{linke Seite} sagt es existieren für alle Knoten $x$ zwei andere Knoten, die mit $x$ verbunden sind. \\
+	Die \textcolor{blue}{rechte Seite} sagt es gilt für alle Knoten in z, dass der Knoten $x$ entweder nicht mit dem Knoten $z$ verbunden ist oder das der Knoten $z$ der Knoten $y$ oder $y'$ ist. \\
+	\textcolor{gray}{Kannst die rechte Seite auch so betrachten (Implikationsformel in 1.2): 
+	\[P(x,z) \rightarrow (Q(y,z)\vee Q(y',z))\]
+		 "Wenn $x$ und $z$ zusammen eine Kante haben, dann ist $z$ entweder $y$ oder $y'$.
+	} \\
+	Die ganze Formel $F$ sagt dann, dass ein Knoten nur mindestens eine Kante oder höchstens zwei Kanten haben kann. \\
 	\\
 	Durch das Paar $\mathcal{A} = (U_\mathcal{A}, I_\mathcal{A})$ können nun allen Termen \textcolor{red}{Werte aus $U_\mathcal{A}$} zugewiesen werden wie folgt:
 	\begin{itemize}
