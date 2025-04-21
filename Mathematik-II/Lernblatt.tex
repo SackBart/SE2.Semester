@@ -1,4 +1,4 @@
-\documentclass{article}
+\documentclass{report}
 \usepackage{graphicx} % Required for inserting images
 \usepackage[left=2cm, right=2cm, top=2cm, bottom=2cm]{geometry}
 \usepackage{amsmath}
@@ -9,7 +9,7 @@
 \usepackage{url}
 \usepackage{hyperref}
 \usepackage{xcolor}
-
+\usepackage{enumitem}
 \usepackage{lineno}
 
 \setlength{\oddsidemargin}{0cm}
@@ -235,4 +235,92 @@
 			\subsection{Lösung mit minimaler Norm (Satz 19.8)}
 				Sei $L$ ein Untervektorraum eines euklidischen Raumes. In der Vorlesung ist $L$ zusätzlich der Lösungsraum eines LGS. In $L$ gibt es nun genau einen Vektor mit der kleinsten Norm.\\
 				\textcolor{gray}{Sei anschaulicher der euklidische Raum nun 3-dimensional und $L$ eine 2-dimensionale Ebene. Dann sagt dieser Satz aus, dass es einen Punkt in dieser Ebene gibt, die dem Ursprung am nächsten liegt. Außerdem: der Vektor vom Ursprung auf diesen Punkt liegt orthogonal zum Lösungsraum $L$}
-\end{document}
+		\chapter{Folgen und Reihen}
+			\section{Grenzwerte von Folgen}
+				Funktionen sind üblicherweise definiert als $ D \rightarrow \mathbb{R}$, wobei $D \subseteq \mathbb{R}$ gilt. \textcolor{gray}{Eine Funktion bildet also eine Menge an Zahlen in $\mathbb{R}$ auf $\mathbb{R}$ ab.}\\
+				Hier sind uns aus der Schule noch Polynomfunktionen, Wurzelfunktionen, Exponentialfunktionen, trigonometrische Funktionen usw. bekannt.\\
+				Folgen sind nun konkrete Funktionen mit $D = \mathbb{N}_0 $, die nun auch als $f = (a_n)_{n\in\mathbb{N}_0}$ bezeichnen kann. \textcolor{gray}{Bei einer Folge wird also jeder natürlicher Zahl ein Wert zugewiesen, es gibt also ein nulltes Folgenglied, ein erstes Folgenglied usw.}
+				\subsection{Definition zur Konvergenz}
+					Eine Folge $f$ heißt konvergent gegen den Grenzwert $\alpha$, wenn gilt:
+					\begin{equation}
+						\mbox{Zu jedem } \varepsilon \in \mathbb{R}, \varepsilon > 0 \mbox{ gibt es ein } n_0 \in \mathbb{N}_0 mit \mid a_n - \alpha \mid < \varepsilon \mbox{ für alle } n \geq n_0
+					\end{equation}
+					\textcolor{gray}{
+						Grundsätzlich: Eine Folge ist konvergent, wenn sie sich, je höher das Folgenglied, einem bestimmten Wert (Z.B. häufig 0) immer weiter annähert. Nochmal konkret zum Satz: falls eine Funktion konvertiert, gibt es bei jedem Folgenglied (ab einer bestimmten Höhe) einen Abstand zum Grenzwert, der für kein späteres Folgenglied wieder größer wird. Oder: Für jedes Folgenglied wird der Abstand zum Grenzwert geringer.}
+					Ist eine Folge nicht konvergent, so ist sie stattdessen divergent. 
+			\subsection{Beispiel 27.2}
+				Hier fasst das Skript einige sehr gute Beispiele, an denen es eigentlich nichts hinzuzufügen gibt. Daher füge ich hier den Ausschnitt des Skripts hinzu:\\
+				\begin{center} \includegraphics[width = 15cm]{pictures/Beispiel 27.2} \end{center}
+			\subsubsection{Bemerkung 27.3}
+				Sei eine Funktion mit $F:D \rightarrow \mathbb{R}$ mit $D = \{n \in \mathbb{N}_0 \mid n > d\}$ definiert, dann gelten die gleichen Regeln, wie vorher gezeigt. \\
+				\textcolor{gray}{Sollte die Funktion erst für höhere Werte definiert werden, Z.B. ist $\sqrt{x-3}$ ist nur für $x \geq 3$ definiert. Auch diese Folgen sind genauso konvergent oder divergent, weil man sie "auf den Nullpunkt verschieben kann" }
+			\subsubsection{Lemma 27.4 zu konvergenten Folgen}
+				\begin{enumerate}[label=(\alph*)]
+					\item Der Grenzwert $\alpha$ einer konvergenten Folge ist eindeutig.
+					\textcolor{gray}{Eine konvergente Folge nähert sich einem Grenzwert beliebig genau an. Da kann es nicht noch einen weiteren Grenzwert der Folge geben.}
+					\item Die Werte einer Folge sind nach oben und unten beschränkt.
+					\textcolor{gray}{Eine konvergente Folge konvergiert gegen einen Grenzwert und geht daher nicht beliebig weit in eine Richtung, ist also begrenzt.}
+				\end{enumerate}
+			\subsubsection{Lemma 27.5 - Cauchy}
+				\textit{$
+					\mbox{Sei } (a_n)_{n\in\mathbb{N}_0} \mbox{ eine Folge reeller Zahlen. Ist diese Folge konvergent,  so gibt es zu jedem } \varepsilon > 0 \mbox{ ein } n_0 \in \mathbb{N}_0 \mbox{ mit } |a_n - a_m| < \varepsilon \mbox{ für alle } n \geq m \neq n_0
+				$}\\
+				\textcolor{gray}{Dieser Satz über konvergierende Folgen sagt aus, dass der Abstand zwischen Funktionswerten beliebig klein werden. Für jedes positives $\varepsilon$ werden die Abstände zwischen den Folgengliedern beliebig klein, und eben auch kleiner als $\varepsilon$.}
+			\subsubsection{Satz 27.6 - Einschließungs-Kriterium}
+				\textit{Seien $f_a, f_b, f_c$ Folgen, wobei sowohl $f_a$ als auch $f_b$ gegen $\alpha$ konvergieren. Wenn nun auch $a \leq c \leq b$ für jedes Folgenglied gilt, konvergiert auch $f_c$ gegen $\alpha$}.\\
+				\textcolor{gray}{Die Folge $f_c$ ist zwischen $f_a$ und $f_b$ "eingeklemmt". Damit muss $f_c$ auch am gleichen Grenzwert ankommen. Dieser Satz ist vor allem dafür wichtig, den Grenzwert von Folgen zu bestimmen. Wenn man für eine Folge zwei weitere Folgen, eine mit größeren Funktionswerten und eine mit kleineren Funktionswerten, die beide den gleichen Grenzwert haben.}
+			\subsubsection{27.7 - $c^n$}
+				Generell gilt: $c^n$ ist genau dann eine Nullfolge, wenn $|c| < 1$ gilt. \\
+				\textcolor{gray}{Eine Exponentialfunktion geht entweder gegen 0, oder divergiert}
+			\subsubsection{27.8 - Grenzwert-Regeln}
+				Gegeben seien konvergente Folgen $(a_n)_{n\in\mathbb{N}_0}$ und $(b_n)_{n\in\mathbb{N}_0}$ in $\mathbb{R}$. Sei $\alpha := \displaystyle\lim_{n\to\infty}(a_n)$ und $\beta:= \displaystyle\lim_{n\to\infty}(b_n)$
+				\begin{enumerate}[label=(\alph*)]
+					\item Die Folge $c_n := ra_n + sb_n$ konvergiert gegen $r\alpha+s\beta$
+					\item Die Folge $c_n := a_n \cdot b_n$ konvergiert gegen $\alpha \cdot \beta$
+					\item Die Folge $c_n := \frac{a_n}{b_n}$ konvergiert gegen $\frac{\alpha}{\beta}$, solange $b_n \neq 0$ und $\beta \neq 0$
+					\item Gibt es ein $n_0 \in \mathbb{N}_0$ mit $a_n \leq b_n$ für alle $n \geq n_0$, so ist auch $\alpha \leq \beta$
+					\textcolor{gray}{Wenn die Funktion $a$ über $b$ liegt, ist der Grenzwert von $a$ auch über dem Grenzwert von $b$}
+				\end{enumerate}
+		\subsubsection{27.11 - konkretes Beispiel zum Grenzwert}
+			Wir wollen den Grenzwert von $a_n$ bestimmen: 
+			\begin{equation*}
+				a_n = \frac{2n^2 + 3n + 5}{4n^2+5n+1}
+			\end{equation*}
+			Nun kürzen wir mit der höchsten Potenz, hier also $n^2$:
+			\begin{equation*}
+				\frac{2n^2 + 3n + 5}{4n^2+5n+1} = \frac{2 +\frac3n + \frac5{n^2}}{4 + \frac5n + \frac1{n^2}} \rightarrow \frac{2 + 0 + 0}{4 + 0 + 0} = \frac12
+			\end{equation*}
+			jeder Bruch der Form $\frac{k}{n^l}$ mit $l\geq 1$ geht für $n \to \infty$ gegen 0, daher kann man diese mit 0 ersetzen.
+		\subsubsection{27.12 - Monotonie}
+			 \begin{center}
+			 	$\mathrm{f~heißt}\quad
+			 	\begin{Bmatrix}
+			 		\text{monoton wachsend} \\
+			 		\text{streng monoton wachsend} \\
+			 		\text{monoton fallend} \\
+			 		\text{streng monoton fallend}
+			 	\end{Bmatrix},\quad\mathrm{falls}\quad
+			 	\begin{Bmatrix}
+			 		\mathrm{f(x)\leqslant f(y)} \\
+			 		\mathrm{f(x)<f(y)} \\
+			 		\mathrm{f(x)\geqslant f(y)} \\
+			 		\mathrm{f(x)>f(y)}
+			 	\end{Bmatrix}$
+			 \end{center}
+			 Beispiele:
+			 \begin{itemize}
+			 	\item $x^2$ hat keine vollständige Monotonie
+			 	\item $x^3$ ist monoton wachsend
+			 	\item $-x$ ist streng monoton fallend
+			 	\item $e^x$ ist streng monoton wachsend
+			 \end{itemize}
+		\subsubsection{Monotonie-Prinzip}
+			Eine monoton wachsende und beschränkte Folge ist konvergent\\
+			\\
+			\textcolor{gray}{Eine Folge, dessen Werte nur nach "oben gehen", aber nach oben beschränkt ist, muss zu dieser Grenze konvergieren}
+		\subsubsection{bestimmte Divergenz}
+			Eine Folge ist bestimmt divergent gegen $\infty$, wenn die Werte der Folge ab einem bestimmten Folgenglied immer größer werden. \textcolor{gray}{Die Werte von $x^2$ werden immer größer und sind nicht beschränkt. $x^2$ divergiert also bestimmt gegen $\infty$}
+			Eine Folge kann auf die gleiche Weise bestimmt divergent gegen $-\infty$ sein.
+		\subsubsection{Lemma 27.17 - zur Divergenz}
+			Ist eine Folge $a_n$ divergent gegen $\pm \infty$, so konvergiert $\frac1{a_n}$ gegen 0\\
+	\end{document}
