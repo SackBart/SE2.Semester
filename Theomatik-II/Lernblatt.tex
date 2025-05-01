@@ -11,6 +11,7 @@
 \usepackage[linguistics]{forest}
 \usepackage{lineno}
 \usepackage{tikz}
+\usepackage{listings}
 \usetikzlibrary{automata, positioning}
 
 \title{Theoretische Informatik II}
@@ -365,17 +366,17 @@
 		\end{align*}
 		Dabei ist die letzte Formel in KNF. \\
 		\textcolor{gray}{
-			$[1]$ deMorgansche-Regeln bei beiden. (Doppelnegierungen werden weggestrichen)\\
-			$[2]$ deMorgansche-Regeln erneut.\\
-			$[3]$ Da spielt das 2. Distributivgesetz eine große Rolle:
+			$[1a]$ deMorgansche-Regeln bei beiden. (Doppelnegierungen werden weggestrichen)\\
+			$[2a]$ deMorgansche-Regeln erneut.\\
+			$[3a]$ Da spielt das 2. Distributivgesetz eine große Rolle:
 		}
 		\begin{align*}
 			((\neg A \vee (C \vee \neg B)) \vee (D \wedge (\neg B \vee \neg A))) &\equiv \textcolor{red}{(\neg A \vee C \vee \neg B)} \vee (\textcolor{blue}{D} \wedge \textcolor{green}{(\neg B \vee \neg A)}) \: [1] \\
 			&\equiv (\neg A \vee C \vee \neg B \vee D) \wedge (\neg A \vee C \vee \neg B \vee \neg B \vee \neg A) \: [2]
 		\end{align*}
 		\textcolor{gray}{
-			$[1]$ \textcolor{red}{Rot ist F}, \textcolor{blue}{Blau ist G} und \textcolor{green}{Grün ist H}. Dabei erhält man die Formel $(F \vee (G \wedge H))$ und diese ist äquivalent zu $((F \vee G) \wedge (F \vee H))$\\ (2. Distributivformel)\\
-			$[2]$ Die Formel aus der Beschreibung von $[1]$ angewendet.\\
+			$[1b]$ \textcolor{red}{Rot ist F}, \textcolor{blue}{Blau ist G} und \textcolor{green}{Grün ist H}. Dabei erhält man die Formel $(F \vee (G \wedge H))$ und diese ist äquivalent zu $((F \vee G) \wedge (F \vee H))$\\ (2. Distributivformel)\\
+			$[2b]$ Die Formel aus der Beschreibung von $[1b]$ angewendet.\\
 		}
 		\subsection{KNF aus der Wahrheitstafel}
 		\begin{tabular}{c|c|c||c}
@@ -481,7 +482,7 @@
 	Durch $I_\mathcal{A}$ müssen dann alle freien Variablen, Prädikate und alle Funktionen definiert werden. In dem Fall wählen wir jetzt \\
 	\\
 	$U_\mathcal{A} = V$ für einen ungerichteten Graphen $G = (V,E)$ \\
-	\textcolor{gray}{Ein ungerichteter Graph ist nicht anders als ein Graph von einem Automaten oder von einem Syntaxbaum: } \\
+	\textcolor{gray}{Ein ungerichteter Graph ist nicht anders als z.B. ein Graph von einem Automaten oder von einem Syntaxbaum: } \\
 	\\
 	\begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto]
 		\tikzstyle{every state}=[fill={rgb:black,1;white,30}]
@@ -498,7 +499,7 @@
 	\end{tikzpicture}\\
 	 \textcolor{gray}{Dabei ist $V$ die Menge der Knoten (Kreise) und E die Menge der Kanten (Verbindungen zwischen 2 Knoten) mit $E \subseteq V \times V$}
 	\\
-	$I_\mathcal{A}(P) = P^\mathcal{A} = \{(u,v) \:|\: u,v \in V \: und \: \{u,v\}\in E\}$ (Kantenrelation)\\
+	$I_\mathcal{A}(P) = P^\mathcal{A} = \{(u,v) \:|\: u,v \in V \: \text{und} \: \{u,v\}\in E\}$ (Kantenrelation)\\
 	\textcolor{gray}{Anders ausgedrückt: P ist eine zweistellige Funktion und sind beide Knoten miteinander verbunden? Wahr wenn ja, falsch wenn nein.} \\
 	$I_\mathcal{A}(Q) = Q^\mathcal{A} = \{(u,u) \:|\: u \in V\}$  (Gleichheit) \\
 	\textcolor{gray}{Anders ausgedrückt: Q ist eine zweistellige Funktion und sind beide Knoten gleich? Wahr wenn ja, falsch wenn nein.} \\
@@ -583,5 +584,123 @@
 		\item Wenn F nicht allgemeingültig ist, schreiben wir $\nvDash F$
 	\end{itemize}
 	\section{Churchsche These}
-	\textcolor{gray}{Einheit 5 aus Vorlesung Nr.3}
+	\textcolor{gray}{Einheit 5 aus Vorlesung Nr.3} \\
+	\subsection{Berechenbarkeitstheorie}
+	\begin{itemize}
+		\item Intuitiver Berechenbarkeitsbegriff.
+		\item Funktion $f: \mathbb{N}^k \rightarrow \mathbb{N} \Leftrightarrow$ Algorithmus.
+		\item Partielle Funktionen (unendliche Schleife) zugelassen. \\
+		\\
+		\textbf{Beispiel:} 
+		\begin{lstlisting}
+INPUT(n);
+REPEAT UNTIL FALSE
+		\end{lstlisting}
+		Dabei ist $f: \mathbb{N} \rightarrow \mathbb{N}, f(n)$ undefiniert $\forall n$. Diese Funktion wird oft als $\Omega$ notiert und "nirgends definierte Funktion" bezeichnet.
+	\end{itemize}
+	\subsection{Beispiele}
+\[f(n) = \begin{cases}
+			1, & \text{Falls n \textbf{Anfangsabschnitt} der Dezimalbruchentwicklung von $\pi$ \textbf{ist}.}\\
+			0, & \text{sonst}
+		\end{cases}\]
+		\\
+ \[g(n) = \begin{cases}
+			1, & \text{Falls n \textbf{Anfangsabschnitt} der Dezimalbruchentwicklung von $\pi$ \textbf{vorkommt}.}\\
+			0, & \text{sonst}
+		\end{cases}\]
+		Dabei ist $f$ berechenbar und von $g$ weiß man nicht.
+\[h(n) = \begin{cases}
+			1, & \text{falls in der Dezimalbruchentwicklung von $\pi$ an irgendeiner Stelle \textbf{n mal hintereinander} eine 7 steht.}\\
+			0, & \text{sonst}
+		\end{cases}\]
+		\textcolor{gray}{Sei $n = 2$, dann würde $f(n) = 1$ sein, wenn z.B: $\pi = 3.14...77...$ vorkommt. (Ich habe das nicht überprüft, ob das wahr ist.)}
+\[i(n) = \begin{cases}
+			1, & \text{falls Problem \textbf{X} (X sei ein offenes Problem) positiv lösbar.}\\
+			0, & \text{sonst}
+		\end{cases}\]
+		\subsection{Chursche These}
+		Die durch die formale Definition der \textbf{Turing-Berechenbarkeit}
+		(oder auch WHILE-Berechenbarkeit, GOTO-Berechenbarkeit,
+		$\mu$-Rekursivität) beschriebene \textbf{Klasse von Funktionen} stimmt
+		mit der Klasse der \textbf{im intuitiven Sinne} berechenbaren
+		Funktionen überein.
+		\subsection{Turing-Berechenbarkeit}
+		\subsubsection{Definition}
+		$f: \mathbb{N}^k \rightarrow \mathbb{N}$ heißt \textbf{Turing-Berechenbar}, falls es eine DTM $M$ gibt, so dass $f(n_1,...,n_k) = m$ genau dann gilt, wenn $M$, gestartet in Anfangszustand mit dem k-Tupel $n_1,...,n_k$ auf ihrem Band (in Binärdarstellung, mit Trennzeichen zwischen den Komponenten) nach endlich vielen Schritten einen Endzustand erreicht mit Bandinhalt m. Bei einem undefinierten Wert läuft die Maschine unendlich lange. \\
+		\textcolor{gray}{Das auch Analog zu $f: \Sigma^* \rightarrow \Sigma^*$} 
+		\subsubsection{Beispiele}
+		\begin{itemize}
+			\item Man betrachte die Dekrement Funktion: \\
+			$f: \mathbb{N} \rightarrow \mathbb{N}$ \\
+			$f(n) = n - 1, \: \text{falls} \: n > 0$ \\
+			$f(0) = 0$ \\
+			\\
+			Man schreibt $f(n) = n - 1$ und man spricht von \textbf{modifizierter} Substraktion. \\
+			\\
+			Es gilt allg. $a - b = max\{0, a-b\}$ 
+			\item Auch die nirgends definierte Funktion ist Turing-berechenbar: \\
+			\\
+			$\Omega: \mathbb{N} \rightarrow \mathbb{N}$ \\
+			$\Omega(n)$ ist undefiniert $\forall n$. \\
+			\textcolor{gray}{Beweis: \\
+				$(q_0, x) \mapsto (q_0, x, R) \quad \forall x$
+			}
+			\item \[f: \mathbb{N}^2 \rightarrow \mathbb{N} \quad f(a,b) = a+b\]
+			\item \[g: \mathbb{N}^2 \rightarrow \mathbb{N} \quad g(a,b) = a-b\]
+			\item \[h: \mathbb{N}^2 \rightarrow \mathbb{N} \quad h(a,b) = a\cdot b\]
+			\item \[i: \mathbb{N}^2 \rightarrow \mathbb{N} \quad i(a,b) = \lfloor a / b \rfloor, \text{ falls } b \neq 0\]
+			\[i(a,0) = a\]
+		\end{itemize}
+		\textcolor{gray}{Bedeutung von $\lfloor a/b \rfloor$: \\
+			Die "Klammer" um $a/b$ ist nichts anderes als eine Abrundung von Dezimalzahlen. Bsp: $\lfloor 1,8 \rfloor = 1$. Das wird in der Funktion angewendet, damit das Ergebnis in den natürlichen Zahlen bleibt.
+		}
+		\section{Mehrband-Turingmaschinen}
+		\textcolor{gray}{Einheit 6 aus Vorlesung Nr.3}
+		\subsection{Definition}
+		\begin{itemize}
+			\item Das gleiche wie eine 1-Band-TM, aber nur mit mehreren Bändern.
+			\item Pro Band ein Schreib- und Lesekopf.
+			\item Übergangsfunktion: $Q \times \Gamma^k$ nach $Q \times \Gamma^k \times \{L,R,N\}^k$. 
+		\end{itemize}
+		\textbf{Satz: } \\
+		Zu jeder Mehrband-Turingmaschine $M$ gibt es eine 1-Band-TM $M'$\\ mit $L(M) = L(M')$ bzw. bei Funktionenberechnung so, dass $M$ und $M'$ dieselbe Funktion berechnen.
+		\subsection{Notation für spezielle Turingmaschinen}
+		Sei $M$ eine 1-Band-TM:
+		\begin{itemize}
+			\item $M(i,k)$ bezeichnet die k-Band-Maschine, die wie $M$ arbeitet, wobei Band i als Arbeitsband benutzt wird. Die übrigen Bänder bleiben ungenutzt. \\
+			\\
+			\textcolor{gray}{In dem Fall bedeutet das, dass der Übergang von M
+			\[\delta(q,a) = (q',b,y)\]
+			in $M(i,k)$ zu folgendem Übergang wird
+			\[\delta(q,c_1,...,c_{i-1},a,c_{i+1},...,c_k) = \]
+			\[(q',c_1,...,c_{i-1},b,c_{i+1},...,c_k,N,...,N,y,N,...,N)\]}
+			\item Wenn der Wert von $k$ uninteressant ist, schreiben wir $M(i)$.
+			
+		\end{itemize}
+		\subsection{Weitere Schreibweisen}
+		\begin{itemize}
+			\item $Band := Band+1$ oder $Band := Band-1$
+			\item $Band i := Band i + 1$ oder $Band i := Band i - 1$ \\
+			Sei $M$ eine Maschine, die die Inkrement-Funktion berechnet. \\
+			$M'$ entsprechend für die Dekrement-Funktion.\\
+			Dann sind $M(i)$ und $M'(i)$ die Maschinen für $Band i := \pm 1$.
+			\item $Band i := 0$ \\
+			Man beginnt mit einer Maschine $M$ für $Band := 0$. \\
+			Dann ist $M(i)$ die gesuchte Maschine.
+			\item $Band i := Band j$
+		\end{itemize}
+		\subsection{Hintereinanderausführung}
+		\begin{itemize}
+			\item \textbf{Flussdiagrammnotation:}
+			\[start \rightarrow M_1 \rightarrow M_2 \rightarrow stop\]
+			\item \textbf{Programmiersprachen-Notation:}
+			\[M_1;M_2\]
+			\item \textbf{Bedeutung:} \\
+			\\
+			Die Maschinen $M_i$ seien als 7-Tupel $(Q_i, \Sigma, \Gamma_i, \delta_i, q_i, \square, F_i)$ gegeben. \\
+			Dabei sei ohne Beschränkung der Allgemeinheit $Q_1 \cap Q_2 = \varnothing$. \\
+			Als $M_1;M_2$ bezeichnet man dann folgende Maschine $M$: \\
+			\[M = (Q_1 \cup Q_2, \Sigma, \Gamma_1 \cup \Gamma_2, \delta, q_1, \square, F_2)\] mit
+			\[\delta = \delta_1 \cup \delta_2 \cup \{(q,a,q_2,a,N) \: | \: q \in F_1, a \in \Gamma_1\}\]
+		\end{itemize}
 \end{document}
