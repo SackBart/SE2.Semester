@@ -323,4 +323,47 @@
 			Eine Folge kann auf die gleiche Weise bestimmt divergent gegen $-\infty$ sein.
 		\subsubsection{Lemma 27.17 - zur Divergenz}
 			Ist eine Folge $a_n$ divergent gegen $\pm \infty$, so konvergiert $\frac1{a_n}$ gegen 0\\
+	\section{Unendliche Reihen}
+		\subsection{Definition}
+		Für eine Folge $a_n$ ist $A_n$ mit $A_n := \sum_{k=0}^n ak$ die Reihe, wobei jedes $A_n$ eine Partialsumme darstellt.\\
+		\textcolor{gray}{Die Reihe ist also die Summe aller Folgenglieder. Ist die Folge also $a_n = 1$ für alle $a_n$, so ist die Reihe dazu $A_n = n$}
+		\subsection{geometrische Reihe}	
+		Eine geometrische Reihe ist eine Reihe über eine exponentielle Folge. Hier gilt für eine Folge $a_n = c^n$, dass die Reihe genau dann konvergiert, wenn $|c| \leq 1$ gilt. Sonst würde die Reihe divergieren.
+		Falls die Reihe konvergiert, gilt:\\
+		\begin{equation}
+			\displaystyle\sum_{n=0}^{\infty} c^n = lim_{n\to\infty}(A_n) = \frac1{1-c}
+		\end{equation}
+		Mit dieser Formel kann man den Grenzwert einer geometrischen Reihe bestimmen.
+		\subsection{Lemma 28.3 zur Konvergenz von Reihen}
+		Konvergiert eine Reihe $A_n$, so ist $a_n$ eine Nullfolge.\\
+		\textcolor{gray}{Wenn die Summe der Folgenglieder sich irgendwann nicht mehr groß ändert, dürfen die Folgenglieder selbst auch nicht mehr groß sein.}
+		\subsection{Bemerkung zum Beginn der Summe}
+		Es ist für die Konvergenzbetrachtung einer Reihe egal, ab welchem Index die Summe genommen wird. So gilt für $\sum_{k=0}^{n}a_n$ die gleiche Konvergenz wie für $\sum_{k=1000}^n a_n$. Genau wenn eine dieser Reihen konvergiert, konvergiert auch die andere. Achtung! Die Grenzwerte selbst müssen nicht gleich sein, lediglich deren Existenz.
+		\subsection{$a_n = \frac1n$}
+			Die Reihe über $a_n = \frac1n$ konvergiert nicht. Der Beweis wir in der Vorlesung dargestellt, hier ist nur relevant, das wir dies als gegeben annehmen können.
+		\subsection{Summenregel}
+			Seihen $A_n$ und $B_n$ konvergente Reihen: So konvergiert $\sum_{k=0}^{\infty} ra_n + sb_n$ gegen $r \cdot \sum_{k=0}^{\infty} a_n + s \cdot \sum_{k=0}^{\infty} b_n$
+		\subsection{Absolute Konvergenz}
+			Eine Reihe $A_n$ ist genau dann \textbf{absolut Konvergent}, wenn die Reihe $\sum_{k=0}^{\infty} |a_n| $ konvergiert.\\
+			Falls eine Reihe absolut konvergent ist, so ist sie auch konvergent.
+		\subsection{Majoranten-Kriterium}
+			Sandwich-Kriterium für Reihen: Gilt für zwei Folgen $a_n$, $b_n$ $0 \leq a_n \leq b_n$ für alle $n$, und konvergiert die Reihe über $b_n$, so konvergiert auch die Reihe über $a_n$. \\
+			\textcolor{gray}{Dieser Satz folgt aus der Idee des Sandwich-Prinzips.}
+			Das lässt sich auch in die andere Richtung kleiner 0 (als Minoranten-kriterium) durchführen.
+		\subsection{Vollständigkeit der Grenzwerte}
+			Für jedes $x\in \mathbb{R} $ gibt es eine Folge mit x als Grenzwert.
+		\subsection{Cauchy-Produkt von Reihen}
+			Seien $A_n$ und $B_n$ absolut konvergierende Folgen. Das Cauchy-Produkt ist die Reihe $c_n$ mit $c_n := \sum_{k=0}^{\infty} a_kb_{n-k}$ Dann ist auch $c_n$ konvergent und es gilt: 
+			\begin{equation}
+				\displaystyle \sum_{k=0}^{\infty} c_n = \displaystyle \sum_{k=0}^{\infty} a_n \cdot \displaystyle \sum_{k=0}^{\infty} b_n 
+			\end{equation}
+			\textcolor{gray}{Hier verzichte ich auf den Beweis, hierfür kann ich nur auf die Vorlesung verweisen. }
+		\subsection{Leibniz-Kriterium}
+			Sei $a_n$ eine Nullfolge (mit $a_n \geq 0$) die monoton fällt ($a_n \geq a_{n+1}$). Dann konvergiert die Reihe $\sum_{k=0}^{\infty} (-1)^n \cdot a_n$.\\
+			\textcolor{gray}{Tatsächlich benutzen wir das eher umgekehrt. Wenn $a_n$ eine Reihe ist, die den Faktor $(-1)^n$ beinhaltet, können wir die Folge ohne diesen Faktor betrachten, und an dieser neuen Folge herausfinden, ob die Reihe über $a_n$ konvergiert.}
+		\subsection{Quotienten-Kriterium}
+			Sei $a_n$ eine Folge: Für genügend große $k$ muss $\mid\frac{a_{k+1}}{a_k}\mid \leq 1$ gelten, dann ist die Reihe über $a_n$ absolut konvergent.\\
+			\textcolor{gray}{Dieser Satz folgt direkt aus der Bedeutung der Nullfolge für die dazugehörige Reihe. Um das Quotienten-Kriterium anzuwenden dividiert man allgemein zwei aufeinander folgende Folgenglieder durcheinander und weist nach, das der Betrag des Quotienten kleiner 1 ist.}
+	\section{Potenzreihen und die Exponential-Funktion}
+		
 	\end{document}
